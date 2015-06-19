@@ -1,0 +1,20 @@
+<!-- ko template: {afterRender: afterRender } -->
+<ul class="list-group">
+  <li class="list-group-item list-group-item-info">
+      <span data-bind="text: 'Service Credits for ' + customer().name()"></span>
+      <span class="glyphicon glyphicon-plus pull-right actionable" title="Add Service" data-bind="click: addService"></span>
+  </li>
+  <!-- ko foreach: customer().services -->
+  <li class="list-group-item">
+      <span class="badge actionable" data-bind="text: credit, visible: !edit(), click: startEdit"></span>
+      <input data-bind="value: credit, visible: edit, click: startEdit, event: {blur: stopEdit}" class="badge-edit" type="number" />
+      <span data-bind="text: name, visible: !edit(), click: startEdit" class="actionable"></span>
+      <select data-bind="options: $parent.serviceNames,
+                    visible: edit, value: name, 
+                    click: startEdit, event: {blur: stopEdit}">
+          
+      </select>
+  </li>
+  <!-- /ko -->
+</ul>
+<!-- /ko -->

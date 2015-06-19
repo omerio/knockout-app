@@ -1,0 +1,29 @@
+[{
+	"request": {
+		"url": "^/data/customers?$",
+		"method": "POST"
+	},
+	"response": {
+		"status": 200,
+		"latency": 400,
+		"headers": {
+			"Content-Type": "application/json"
+		},
+		"file": "stubs/data/saveCustomers.json"
+	}
+}, {
+
+	"request": {
+		"url": "^/data/customers?$",
+		"method": "GET"
+	},
+	"response": {
+		"status": 200,
+		"latency": 800,
+		"headers": {
+			"Content-Type": "application/json"
+		},
+		"file": "stubs/data/getCustomers.json"
+	}
+
+}]

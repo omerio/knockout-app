@@ -1,0 +1,16 @@
+.list-group-item .badge-edit {
+  float: right;
+  width: 50px;  
+}
+
+input[type="number"] {
+   width:50px;
+}
+
+.actions {
+    width: 50px;    
+}
+
+.actionable {
+	cursor: pointer;
+}
