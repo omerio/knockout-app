@@ -2,7 +2,7 @@
 
 ## Introduction
 
-KnockoutJS-App is a basic functioning CRUD (Create, Read, Update & Delete) application using [Knockout](http://Knockout.com/). The application demonstrates the loading, rendering and saving of nested JSON data using AJAX. 
+KnockoutJS-App is a basic functioning CRUD (Create, Read, Update & Delete) application using [Knockout](http://knockoutjs.com/). The application demonstrates the loading, rendering and saving of nested JSON data using AJAX. 
 
 The application uses: 
 * [knockout components](http://knockoutjs.com/documentation/component-overview.html) to create an encapsulated HTML component or widget, 
@@ -10,7 +10,7 @@ The application uses:
 * [Bootstrap](http://getbootstrap.com/) for styling and theming the user interface and 
 * [Toastr](https://github.com/CodeSeven/toastr) for notifications.
 
-This document assumes you are familiar with the basics of Knockout and have at least been through the [Knockout tutorial](http://learn.Knockout.com/). If you are reading this, you have probably been through the basics of Knockout and now asking yourself how you can develop a full application or even a single page application using Knockout, read on, hopefully you will find some of the answers here. You can view a functioning JSFiddle of the application without AJAX [here](http://jsfiddle.net/omerio/pr04gsta/15/).
+This document assumes you are familiar with the basics of Knockout and have at least been through the [Knockout tutorial](http://learn.knockoutjs.com/). If you are reading this, you have probably been through the basics of Knockout and now asking yourself how you can develop a full application or even a single page application using Knockout, read on, hopefully you will find some of the answers here. You can view a functioning JSFiddle of the application without AJAX [here](http://jsfiddle.net/omerio/pr04gsta/15/).
 
 ## Why Knockout
 
@@ -23,7 +23,7 @@ Using [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel)
 
 ## Knockout Application Design
 
-A Knockout application needs a [View Model](http://Knockout.com/documentation/observables.html) to operate on, there are many design options as to how to implement this view model. First let's define the following elements of a Knockout application:
+A Knockout application needs a [View Model](http://knockoutjs.com/documentation/observables.html) to operate on, there are many design options as to how to implement this view model. First let's define the following elements of a Knockout application:
  
 1. The application views or HTML fragments.
 2. One or many View Models that represent data retrieved from the server.
@@ -186,7 +186,7 @@ For example the `name` column toggles between a div or an input field depending 
 </td>
 ````
 
-This technique will have many hidden input fields for each table row, which might not be the optimal option when there is a large number of customer objects to display, resulting in heavy markup. An alternative technique is to use the [Knockout Virtual Elements](http://Knockout.com/documentation/custom-bindings-for-virtual-elements.html) to ensure the input fields are not created if the row isn't currently being edited:
+This technique will have many hidden input fields for each table row, which might not be the optimal option when there is a large number of customer objects to display, resulting in heavy markup. An alternative technique is to use the [Knockout Virtual Elements](http://knockoutjs.com/documentation/custom-bindings-for-virtual-elements.html) to ensure the input fields are not created if the row isn't currently being edited:
 
 ````html
 <td>
@@ -231,7 +231,7 @@ Which correctly prints out:
 
 ## Coding Components
 
-[Knockout components](http://Knockout.com/documentation/component-overview.html) can be used to create encapsulated HTML components or widgets. This promotes reuse and avoids duplicating HTML fragments and View Models. For our Customer Admin application there is a need to manage customers' services. This is created as a component and can be reused in other parts of the user interface or in other apps.
+[Knockout components](http://knockoutjs.com/documentation/component-overview.html) can be used to create encapsulated HTML components or widgets. This promotes reuse and avoids duplicating HTML fragments and View Models. For our Customer Admin application there is a need to manage customers' services. This is created as a component and can be reused in other parts of the user interface or in other apps.
 
 ````js
 ko.components.register('service-credits', {
@@ -246,7 +246,7 @@ ko.components.register('service-credits', {
 });
 ````
 
-The Knockout component's template can be a string of markup, an id of an existing element or others as explained the [documentation](http://Knockout.com/documentation/component-registration.html#specifying-a-template). When the template markup is very large it's difficult adding it as a string and difficult to maintain. Luckily Knockout provides the ability to add custom template loaders so the template for a component can be loaded remotely from a file using AJAX. This approach ensures the template is only loaded when the component is initialized. For example in our case, the `serviceCredits.html` component template file is only requested when the user selects a row on the customers table. Here is a definition of a custom component [template loader](http://Knockout.com/documentation/component-loaders.html) that uses AJAX to load component templates from the server. 
+The Knockout component's template can be a string of markup, an id of an existing element or others as explained the [documentation](http://knockoutjs.com/documentation/component-registration.html#specifying-a-template). When the template markup is very large it's difficult adding it as a string and difficult to maintain. Luckily Knockout provides the ability to add custom template loaders so the template for a component can be loaded remotely from a file using AJAX. This approach ensures the template is only loaded when the component is initialized. For example in our case, the `serviceCredits.html` component template file is only requested when the user selects a row on the customers table. Here is a definition of a custom component [template loader](http://knockoutjs.com/documentation/component-loaders.html) that uses AJAX to load component templates from the server. 
 
 ### Template afterRender Function
 The Knockout template provides an ability to bind an `afterRender` callback. This can be used if you need to do further processing of the generated component markup after Knockout has finished processing and rendering it. This is handy if you use libraries like [jQuery UI](https://jQueryui.com/) to create widgets after the Knockout template is rendered. 
@@ -383,7 +383,7 @@ this.save = function () {
 
 ## Understanding Context (Scope)
 
-Understanding [context](http://Knockout.com/documentation/binding-context.html) is really key to grasping the Model-View-ViewModel (MVVM) concepts. A really useful Chrome extension that can help with inspecting the current Knockout context is the [Knockout context debugger](https://chrome.google.com/webstore/detail/Knockout-context-debugg/oddcpmchholgcjgjdnfjmildmlielhof?utm_source=chrome-app-launcher-info-dialog). Using the debugger we are able to inspect the different contexts in the customer admin application and view the values of the built in Knockout variables such as `$data`, `$parent`, `$parents`, `$parentContext` and `$index`.
+Understanding [context](http://knockoutjs.com/documentation/binding-context.html) is really key to grasping the Model-View-ViewModel (MVVM) concepts. A really useful Chrome extension that can help with inspecting the current Knockout context is the [Knockout context debugger](https://chrome.google.com/webstore/detail/Knockout-context-debugg/oddcpmchholgcjgjdnfjmildmlielhof?utm_source=chrome-app-launcher-info-dialog). Using the debugger we are able to inspect the different contexts in the customer admin application and view the values of the built in Knockout variables such as `$data`, `$parent`, `$parents`, `$parentContext` and `$index`.
 
 The root ViewModel context is marked with the red rectangle in the screenshot below. This context can be referenced in bindings using the `$root` Knockout variable. The `$data` Knockout variable always references the View Model for the current context. The table below explains the various contexts in the customer admin application:
 
