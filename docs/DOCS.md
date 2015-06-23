@@ -10,7 +10,7 @@ The application uses:
 * [Bootstrap](http://getbootstrap.com/) for styling and theming the user interface and 
 * [Toastr](https://github.com/CodeSeven/toastr) for notifications.
 
-This document assumes you are familiar with the basics of Knockout and have at least been through the [Knockout tutorial](http://learn.Knockout.com/). If you are reading this, you have probably been through the basics of Knockout and now asking yourself how you can develop a full application or even a single page application using Knockout, read on, hopefully you will find some of the answers here. 
+This document assumes you are familiar with the basics of Knockout and have at least been through the [Knockout tutorial](http://learn.Knockout.com/). If you are reading this, you have probably been through the basics of Knockout and now asking yourself how you can develop a full application or even a single page application using Knockout, read on, hopefully you will find some of the answers here. You can view a functioning JSFiddle of the application without AJAX [here](http://jsfiddle.net/omerio/pr04gsta/15/).
 
 ## Why Knockout
 
