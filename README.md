@@ -7,6 +7,7 @@ KnockoutJS-App is a basic functioning CRUD (Create, Read, Update & Delete) appli
 * [Bootstrap](http://getbootstrap.com/) for styling and theming the user interface and 
 * [Toastr](https://github.com/CodeSeven/toastr) for notifications.
 
+
 * Source: [github.com/omerio/knockout-app](https://github.com/omerio/knockout-app)
 * Author: [Omer Dawelbeit](http://omerio.com)
 * [JSFiddle example (without AJAX)](http://jsfiddle.net/omerio/pr04gsta/15/)
