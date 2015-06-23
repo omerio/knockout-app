@@ -9,7 +9,6 @@ KnockoutJS-App is a basic functioning CRUD (Create, Read, Update & Delete) appli
 
 * Source: [github.com/omerio/knockout-app](https://github.com/omerio/knockout-app)
 * Author: [Omer Dawelbeit](http://omerio.com)
-* Homepage: [omerio.com/knockoutjs-app](http://omerio.com/knockoutjs-app)
 * [JSFiddle example (without AJAX)](http://jsfiddle.net/omerio/pr04gsta/15/)
 
 ## Jump start
@@ -25,7 +24,7 @@ Prequisites: Node, Git, Grunt, Bower
 
 ## Documentation
 
-The [KnockoutJS-App](http://omerio.com/knockoutjs-app) documentation explains the application code and functionality in details.
+The [KnockoutJS-App](https://github.com/omerio/knockout-app/blob/master/docs/DOCS.md) documentation explains the application code and functionality in details.
 
 ## Features
 

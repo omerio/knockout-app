@@ -13,7 +13,6 @@ ko.components.register('service-credits', {
 		this.serviceNames = ['Website Templates', 'Stock Images', 'Sound Tracks', 'Screen Savers', 'Wordpress Themes'];
 
 		this.addService = function () {
-			console.log('Add Service');
 			if (!this.customer().services) {
 				this.customer().services = ko.observableArray();
 			}
