@@ -29,7 +29,7 @@ function CustomerAdmin(element) {
 		this.customers.push(customer);
 	};
 
-	this.delete = function (index) {
+	this.remove = function (index) {
 		this.customers.splice(index(), 1);
 		this.selected(false);
 	};
