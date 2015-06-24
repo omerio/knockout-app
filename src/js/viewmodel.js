@@ -39,7 +39,7 @@ function CustomerAdmin(element) {
 	};
 
 	this.save = function () {
-		var customers = ko.toJSON(this);
+		var customers = ko.toJSON(this.customers);
 		toastr.info("Saving customers");
 		this.saving(true);
 
