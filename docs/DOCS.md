@@ -1,3 +1,26 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [KnockoutJS-App Documentation](#knockoutjs-app-documentation)
+  - [Introduction](#introduction)
+  - [Why Knockout](#why-knockout)
+  - [Knockout Application Design](#knockout-application-design)
+  - [Customer Admin Application](#customer-admin-application)
+  - [Loading Initial Data](#loading-initial-data)
+  - [Knockout Mapping Plugin](#knockout-mapping-plugin)
+  - [Implementing the Customers Table](#implementing-the-customers-table)
+  - [Managing UI State using Boolean View Model Flags](#managing-ui-state-using-boolean-view-model-flags)
+  - [Coding Components](#coding-components)
+    - [Template afterRender Function](#template-afterrender-function)
+  - [Managing inline editing](#managing-inline-editing)
+  - [Adding New Items](#adding-new-items)
+  - [Saving Data](#saving-data)
+  - [Understanding Context (Scope)](#understanding-context-scope)
+  - [Where to next?](#where-to-next)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # KnockoutJS-App Documentation
 
 ## Introduction
@@ -354,7 +377,7 @@ this.addService = function () {
 
 ## Saving Data
 
-The customer admin example provides a save button for the user to interactively save their changes. This could be implemented as an automated save each time the user modifies any of the customer details. To send the View Model to the server we need to first unwrap all the Knockout observables. This can be achieved by using the `ko.toJSON` function.
+The customer admin example provides a save button for the user to interactively save their changes. This could be implemented as an automated save each time the user modifies any of the customer details. To send the View Model to the server we need to first unwrap all the Knockout observables. This can be achieved by using the `ko.toJSON` function. 
 
 ````js
 this.save = function () {
@@ -381,6 +404,12 @@ this.save = function () {
 };
 ````
 
+Notice we have used a reference `self` to refer to the View Model instance inside the AJAX callback functions. This is declared inside the `CustomerAdmin` object:
+
+````js
+var self = this;
+````
+
 ## Understanding Context (Scope)
 
 Understanding [context](http://knockoutjs.com/documentation/binding-context.html) is really key to grasping the Model-View-ViewModel (MVVM) concepts. A really useful Chrome extension that can help with inspecting the current Knockout context is the [Knockout context debugger](https://chrome.google.com/webstore/detail/Knockout-context-debugg/oddcpmchholgcjgjdnfjmildmlielhof?utm_source=chrome-app-launcher-info-dialog). Using the debugger we are able to inspect the different contexts in the customer admin application and view the values of the built in Knockout variables such as `$data`, `$parent`, `$parents`, `$parentContext` and `$index`.
@@ -399,5 +428,10 @@ Yellow | `Service` | The View Model of each of the services (of the selected cus
 
 ![](https://github.com/omerio/knockout-app/blob/master/docs/images/customeradmin3.png)
 
+## Where to next?
 
+The following two article are a good read before you start developing complex applications in Knockout:
+
+* [The Top 10 Mistakes That KnockoutJS Developers Make](https://www.airpair.com/knockout/posts/top-10-mistakes-knockoutjs)
+* [Developing large scale KnockoutJS applications](http://blog.scottlogic.com/2014/02/28/developing-large-scale-knockoutjs-applications.html)
 
