@@ -54,6 +54,7 @@ function CustomerAdmin(element) {
 
 			if (status && status.success) {
 				toastr.success("Customers saved successfully");
+				self.load(false);
 
 			} else {
 				toastr.error("Failed to save customers");
@@ -67,7 +68,7 @@ function CustomerAdmin(element) {
 
 	};
 
-	this.load = function () {
+	this.load = function (initialLoad) {
 		toastr.info("Loading customers");
 
 		$.ajax({
@@ -76,14 +77,26 @@ function CustomerAdmin(element) {
 
 		}).done(function (customers) {
 
-			self.customers = ko.mapping.fromJS(customers, {
+			var customersArray = ko.mapping.fromJS(customers, {
 				create: function (options) {
 					return new Customer(options.data);
 				}
 			});
 
-			ko.applyBindings(self, element);
-			$(element).removeClass('hidden');
+			if (initialLoad) {
+				// initial load
+				self.customers = customersArray;
+
+				ko.applyBindings(self, element);
+				$(element).removeClass('hidden');
+
+			} else {
+				// just a refresh
+				self.customers(customersArray());
+			}
+
+			self.selected(false);
+
 			toastr.success("Customers loaded successfully");
 
 		}).fail(function () {

@@ -16,6 +16,7 @@
   - [Managing inline editing](#managing-inline-editing)
   - [Adding New Items](#adding-new-items)
   - [Saving Data](#saving-data)
+    - [A gotcha with re-assigning observables](#a-gotcha-with-re-assigning-observables)
   - [Understanding Context (Scope)](#understanding-context-scope)
   - [Where to next?](#where-to-next)
 
@@ -33,7 +34,7 @@ The application uses:
 * [Bootstrap](http://getbootstrap.com/) for styling and theming the user interface and 
 * [Toastr](https://github.com/CodeSeven/toastr) for notifications.
 
-This document assumes you are familiar with the basics of Knockout and have at least been through the [Knockout tutorial](http://learn.knockoutjs.com/). If you are reading this, you have probably been through the basics of Knockout and now asking yourself how you can develop a full application or even a single page application using Knockout, read on, hopefully you will find some of the answers here. You can view a functioning JSFiddle of the application without AJAX [here](http://jsfiddle.net/omerio/pr04gsta/15/).
+This document assumes you are familiar with the basics of Knockout and have at least been through the [Knockout tutorial](http://learn.knockoutjs.com/). If you are reading this, you have probably been through the basics of Knockout and now asking yourself how you can develop a full application or even a single page application using Knockout, read on, hopefully you will find some of the answers here. You can view a functioning JSFiddle of the application without AJAX [here](http://jsfiddle.net/omerio/pr04gsta/15/). A fully functional demo is located here [http://knockout-app.appspot.com/](http://knockout-app.appspot.com/)
 
 ## Why Knockout
 
@@ -102,7 +103,7 @@ In our example the document onload function creates an instance of the View Mode
 $(function () {
     ...
     var admin = new CustomerAdmin($('.container')[0]);
-    admin.load();
+    admin.load(true);
 });
 ````
 
@@ -112,23 +113,31 @@ $(function () {
 </div>
 ````
 
-The `CustomerAdmin.load` function makes an AJAX call to load the `Customer` objects from the server. Then, on the callback initializes the Knockout bindings on the container `div` passed to the constructor and removes the `hidden` class from it. [Toastr](https://github.com/CodeSeven/toastr) library is used for showing notifications to the end user:
+The `CustomerAdmin.load` function makes an AJAX call to load the `Customer` objects from the server. Then, on the callback initializes the Knockout bindings on the container `div` passed to the constructor and removes the `hidden` class from it. The `load` function accepts an `initialLoad` flag, when this flag is set to true the function perform an initial loading of customers and binding, when set to false it simply performs a reload of customers. [Toastr](https://github.com/CodeSeven/toastr) library is used for showing notifications to the end user:
 
 ````js
-this.load = function () {
+this.load = function (initialLoad) {
     toastr.info("Loading customers");
     $.ajax({
         url: "/data/customers",
         method: "GET"
     }).done(function (customers) {
-        self.customers = ko.mapping.fromJS(customers, {
-            create: function (options) {
-                return new Customer(options.data);
-            }
-        });
+      var customersArray = ko.mapping.fromJS(customers, {
+        create: function (options) {
+          return new Customer(options.data);
+        }
+      });
+      if (initialLoad) {
+        // initial load
+        self.customers = customersArray;
         ko.applyBindings(self, element);
         $(element).removeClass('hidden');
-        toastr.success("Customers loaded successfully");
+      } else {
+        // just a refresh
+        self.customers(customersArray());
+      }
+      self.selected(false);
+      toastr.success("Customers loaded successfully");
     }).fail(function () {
         toastr.error("Failed to loaded customers");
     });
@@ -377,7 +386,7 @@ this.addService = function () {
 
 ## Saving Data
 
-The customer admin example provides a save button for the user to interactively save their changes. This could be implemented as an automated save each time the user modifies any of the customer details. To send the View Model to the server we need to first unwrap all the Knockout observables. This can be achieved by using the `ko.toJSON` function. 
+The customer admin example provides a save button for the user to interactively save their changes. This could be implemented as an automated save each time the user modifies any of the customer details. To send the View Model to the server we need to first unwrap all the Knockout observables. This can be achieved by using the `ko.toJSON` function. Notice we call `self.load(false)` to reload the customers after saving the data, this is to ensure what is shown on the user interface reflects what is saved on the server.
 
 ````js
 this.save = function () {
@@ -393,6 +402,7 @@ this.save = function () {
     }).done(function (status) {
         if (status && status.success) {
             toastr.success("Customers saved successfully");
+            self.load(false);
         } else {
             toastr.error("Failed to save customers");
         }
@@ -409,6 +419,24 @@ Notice we have used a reference `self` to refer to the View Model instance insid
 ````js
 var self = this;
 ````
+
+### A gotcha with re-assigning observables
+If you remember in the `load` function when the customer data is reloaded after the initial load we have done something like:
+
+````js
+if (initialLoad) {
+  // initial load
+  ...
+} else {
+  // just a refresh
+  self.customers(customersArray());
+}
+````
+
+We have set the observable array by calling `self.customers(customersArray())`, if we were to set the new customers array like this `self.customers = customersArray` Knockout would still remember the old value that was bound to the user interface and the application would stop functioning as expected. So remember if your View Model attributes are already observables then call the observable function to assign new values rather than re-assigning the attributes to new observables.
+
+Why did we do `customerArray()` instead of just `customerArray`?, well this is because `customerArray` is constructed using the Knockout mapping plug and will be an observableArray so we are just unwrapping it into an array.
+
 
 ## Understanding Context (Scope)
 

@@ -12,7 +12,11 @@ KnockoutJS-App is a basic functioning CRUD (Create, Read, Update & Delete) appli
 
 **Author**: [Omer Dawelbeit](http://omerio.com)
 
-[JSFiddle example (without AJAX)](http://jsfiddle.net/omerio/pr04gsta/15/)
+
+## Live Demos
+
+JSFiddle example (without AJAX): [http://jsfiddle.net/omerio/pr04gsta/15/](http://jsfiddle.net/omerio/pr04gsta/15/)
+Fully functional example (with AJAX and backend): [http://knockout-app.appspot.com/](http://knockout-app.appspot.com/)
 
 ## Jump start
 

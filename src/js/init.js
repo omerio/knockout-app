@@ -8,5 +8,5 @@ $(function () {
 	toastr.options.fadeIn = 250;
 	var admin = new CustomerAdmin($('.container')[0]);
 	//ko.applyBindings(admin, $('.container')[0]);
-	admin.load();
+	admin.load(true);
 });
